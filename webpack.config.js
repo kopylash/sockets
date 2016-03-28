@@ -4,11 +4,11 @@ var app = path.join(__dirname, "app");
 
 module.exports = {
   context: app,
-  entry: ['./index.js'],
+  entry: ['./index.jsx'],
 
   output: {
-    path: __dirname + '/js',
-    filename: 'bundle.js'
+    path: __dirname + '/assets',
+    filename: 'bundle.web.js'
   },
 
   resolve: {
@@ -19,7 +19,7 @@ module.exports = {
   module: {
     loaders: [
       {
-        test: /\.js$/,
+        test: /\.jsx$/,
         exclude: /node_modules/,
         loader: 'babel-loader',
         query: {
