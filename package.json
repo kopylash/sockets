@@ -19,6 +19,7 @@
     "grunt-contrib-watch": "0.5.3",
     "grunt-sails-linker": "~0.10.1",
     "grunt-sync": "0.2.4",
+    "grunt-webpack": "1.0.11",
     "include-all": "~0.1.6",
     "material-ui": "^0.14.4",
     "radium": "^0.17.0",
@@ -35,7 +36,8 @@
   },
   "scripts": {
     "debug": "node debug app.js",
-    "start": "node app.js"
+    "start": "node app.js",
+    "install": "webpack"
   },
   "main": "app.js",
   "repository": {
