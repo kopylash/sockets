@@ -2,31 +2,46 @@
 
 import React from 'react';
 import Radium from 'radium';
+import rd3 from 'react-d3';
 import { BarChart } from 'react-d3';
 
-class Homepage extends React.Component {
-
-  constructor() {
-    super();
-    this.barData = [
-      {label: 'Hall', value: 50},
-      {label: 'Kitchen', value: 89},
-      {label: 'Room1', value: 43},
-      {label: 'Room2', value: 71},
-      {label: 'Bathroom', value: 32}
-    ];
+var barData = [
+  {
+    "name": "Series A",
+    "values": [
+      { "x": 1, "y":  76},
+      { "x": 2, "y":  54},
+      { "x": 3, "y":  28},
+      { "x": 4, "y":  89},
+      { "x": 5, "y":  103}
+    ]
+  },
+  {
+    "name": "Series B",
+    "values": [
+      { "x": 1, "y":  76},
+      { "x": 2, "y":  54},
+      { "x": 3, "y":  28},
+      { "x": 4, "y":  89},
+      { "x": 5, "y":  103}
+    ]
   }
+];
 
-  render() {
-    return <BarChart
-      data={barData}
-      width={600}
-      height={400}
-      fill={'#47bfbd'}
-      title='Energy consumption'
-    />;
+var Homepage = React.createClass({
+
+   render: function() {
+    return (
+      <BarChart
+        data={barData}
+        width={700}
+        height={500}
+        fill={'#47bfbd'}
+        title='Bar Chart'
+      />
+    );
   }
-}
+});
 
 
-export default Radium(Homepage);
+export default (Homepage);
