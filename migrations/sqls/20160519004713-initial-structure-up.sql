@@ -4,7 +4,7 @@ CREATE TABLE "customers" (
   "id" serial PRIMARY KEY,
   "login" varchar(255) NOT NULL,
   "password" varchar(255),
-  "phone" varchar(20) NOT NULL,
+  "phone" varchar(20) UNIQUE NOT NULL,
   "energyCost" decimal(10,2),
   "wifiPassword" varchar(255),
   "limit" integer,
@@ -39,5 +39,17 @@ CREATE TABLE "usage" (
   "value" decimal(10,2) NOT NULL,
   "plugId" VARCHAR(128) REFERENCES plugs(id)
 );
+
+--insert some test data--
+INSERT INTO customers (id, login, password, phone, "energyCost", "wifiPassword", "limit", "createdAt", "updatedAt")
+VALUES (1, 'vkop@grdnz.com', 'qwerty', '380934682120', 0.99, 'qwerty', 2000, NOW(), NOW());
+
+insert INTO plugs (name,"customerId") VALUES ('socket1',1);
+insert INTO plugs (name,"customerId") VALUES ('socket2',1);
+insert INTO plugs (name,"customerId") VALUES ('socket3',1);
+insert INTO plugs (name,"customerId") VALUES ('socket4',1);
+insert INTO plugs (name,"customerId") VALUES ('socket5',1);
+insert INTO plugs (name,"customerId") VALUES ('socket6',1);
+
 
 
