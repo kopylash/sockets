@@ -35,21 +35,22 @@ module.exports.connections = {
     }
   },
   //dev host
-  // dev: {
-  //   url: process.env.DATABASE_URL,
-  //   user: 'zvfzqcsbaylphb',
-  //   password: 'q0beVWlVpiKzya5ALtKa6y-Kqk',
-  //   database: 'd93g45rk1tebsu',
-  //   options: {
-  //     host: 'ec2-54-228-183-183.eu-west-1.compute.amazonaws.com',
-  //     dialect: 'postgres',
-  //     maxConcurrentQueries: 2,
-  //     pool: {
-  //       max: 1,
-  //       min: 0,
-  //       idle: 500
-  //     }
-  //   }
-  // }
+  dev: {
+    //postgres://kzpmbgthikjdik:pF2tj2fcyllnJhkl9zUNg9_FQJ@ec2-54-228-219-2.eu-west-1.compute.amazonaws.com:5432/d2221mpeig9ctp
+    url: process.env.DATABASE_URL,
+    user: 'kzpmbgthikjdik',
+    password: 'pF2tj2fcyllnJhkl9zUNg9_FQJ',
+    database: 'd2221mpeig9ctp',
+    options: {
+      host: 'ec2-54-228-219-2.eu-west-1.compute.amazonaws.com',
+      dialect: 'postgres',
+      maxConcurrentQueries: 2,
+      pool: {
+        max: 1,
+        min: 0,
+        idle: 500
+      }
+    }
+  }
 
 };
