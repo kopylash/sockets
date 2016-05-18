@@ -18,7 +18,7 @@ CREATE TABLE "plugs" (
   "enabled" boolean NOT NULL DEFAULT FALSE,
   "name" varchar(255) NOT NULL,
   "isProduction" boolean NOT NULL DEFAULT FALSE,
-  "customerId" integer REFERENCES customers(id) NOT NULL,
+  "customerId" integer REFERENCES customers(id),
   "createdAt" timestamp with time zone,
   "updatedAt" timestamp with time zone
 );
@@ -35,7 +35,7 @@ CREATE TABLE "timers" (
 
 CREATE TABLE "usage" (
   "id" serial PRIMARY KEY,
-  "date" timestamp WITH TIME ZONE,
+  "date" timestamp WITH TIME ZONE NOT NULL,
   "value" decimal(10,2) NOT NULL,
   "plugId" VARCHAR(128) REFERENCES plugs(id)
 );
