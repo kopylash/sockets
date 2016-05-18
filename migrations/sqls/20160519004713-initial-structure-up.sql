@@ -15,9 +15,9 @@ CREATE TABLE "customers" (
 CREATE TABLE "plugs" (
   "id" varchar(128) PRIMARY KEY DEFAULT uuid_generate_v4(),
   "description" text,
-  "enabled" boolean,
-  "name" varchar(255),
-  "isProduction" boolean,
+  "enabled" boolean NOT NULL DEFAULT FALSE,
+  "name" varchar(255) NOT NULL,
+  "isProduction" boolean NOT NULL DEFAULT FALSE,
   "customerId" integer REFERENCES customers(id) NOT NULL,
   "createdAt" timestamp with time zone,
   "updatedAt" timestamp with time zone
