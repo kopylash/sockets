@@ -8,6 +8,7 @@
  * For more information on configuration, check out:
  * http://sailsjs.org/#!/documentation/reference/sails.config/sails.config.http.html
  */
+var util = require("util");
 
 module.exports.http = {
 
@@ -21,7 +22,7 @@ module.exports.http = {
   *                                                                           *
   ****************************************************************************/
 
-  // middleware: {
+  middleware: {
 
   /***************************************************************************
   *                                                                          *
@@ -71,7 +72,21 @@ module.exports.http = {
 
     // bodyParser: require('skipper')
 
-  // },
+    handleBodyParserError: function handleBodyParserError(err, req, res, next) {
+      if (req.path && /\/api\/resources/.test(req.path)) {
+        //api formed error
+        return res.json(200,{
+          success: false,
+          errors: ['Can\'t parse JSON request'],
+        });
+      } else {
+        //usual error
+        var bodyParserFailureErrorMsg = 'Unable to parse HTTP body- error occurred :: ' + util.inspect((err&&err.stack)?err.stack:err, false, null);
+        sails.log.error(bodyParserFailureErrorMsg);
+        return res.send(400, bodyParserFailureErrorMsg);
+      }
+    }
+  },
 
   /***************************************************************************
   *                                                                          *
@@ -84,4 +99,5 @@ module.exports.http = {
   ***************************************************************************/
 
   // cache: 31557600000
+
 };
