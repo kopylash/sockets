@@ -41,6 +41,7 @@ module.exports.connections = {
     user: 'kzpmbgthikjdik',
     password: 'pF2tj2fcyllnJhkl9zUNg9_FQJ',
     database: 'd2221mpeig9ctp',
+    host: 'ec2-54-228-219-2.eu-west-1.compute.amazonaws.com',
     options: {
       host: 'ec2-54-228-219-2.eu-west-1.compute.amazonaws.com',
       dialect: 'postgres',
