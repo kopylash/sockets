@@ -5,13 +5,19 @@ module.exports = {
       return res.badRequest();
     }
 
-    sails.sockets.join(req, 'funSockets');
-    // Broadcast a "hello" message to all the fun sockets.
-    // This message will be sent to all sockets in the "funSockets" room,
-    // but will be ignored by any client sockets that are not listening-- i.e. that didn't call `io.socket.on('hello', ...)`
-    sails.sockets.broadcast('funSockets', 'greeting', req.body.id, req);
+    return Plug.findOne({
+      where: {
+        id: req.body.id
+      }
+    }).then(function(plug) {
+      if (plug != null) {
+        sails.sockets.join(req, 'funSockets');
+        sails.sockets.broadcast('funSockets', 'greeting', req.body.id, req);
+        return res.ok('йоу');
+      }
+      return res.forbidden('WRONG UUID of socket plug');
+    });
 
-    // Respond to the request with an a-ok message
-    return res.ok('йоу');
+
   }
 };
