@@ -9,15 +9,16 @@ var io = sailsIOClient(socketIOClient);
 // Set some options:
 // (you have to specify the host and port of the Sails backend when using this library from Node.js)
 io.sails.url = config.apiURL;
-// ...
-var data = {socketName: process.argv[2]};
+
+var data = {id: process.argv[2]};
+console.log(data);
+
 // Send a GET request to `http://localhost:1337/hello`:
 io.socket.get('/hello', data, function serverResponded(body, JWR) {
   // body === JWR.body
   console.log('Sails responded with: ', body);
   console.log('with headers: ', JWR.headers);
   console.log('and with status code: ', JWR.statusCode);
-
 });
 
 io.socket.on('greeting', (msg)=> {
