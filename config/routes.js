@@ -24,6 +24,12 @@ module.exports.routes = {
 
   '/': {
     view: 'index'
-  }
+  },
+
+  'GET /hello': {
+    controller: 'ConnectController',
+    action: 'handshake'
+  },
+
 
 };
