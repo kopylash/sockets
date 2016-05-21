@@ -5,10 +5,6 @@ module.exports = {
       primaryKey: true,
       autoIncrement: true
     },
-    date: {
-      type: Sequelize.DATE,
-      allowNull: false
-    },
     value: {
       type: Sequelize.DECIMAL(10,2),
       allowNull: false
@@ -26,7 +22,7 @@ module.exports = {
 
   options: {
     timestamps: true,
-    tableName: 'customers',
+    tableName: 'usage',
     classMethods: {},
     instanceMethods: {},
     hooks: {}

@@ -31,5 +31,10 @@ module.exports.routes = {
     action: 'handshake'
   },
 
+  'POST /energy/usage': {
+    controller: 'Aggregator/UsageController',
+    action: 'create'
+  }
+
 
 };

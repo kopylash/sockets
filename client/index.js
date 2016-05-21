@@ -11,10 +11,13 @@ var io = sailsIOClient(socketIOClient);
 io.sails.url = config.apiURL;
 io.sails.reconnection = false;
 
-var data = {id: process.argv[2]};
+var ID = process.argv[2];
+var data = {
+  id: ID,
+  enabled: true
+};
 console.log(data);
 
-// Send a GET request to `http://localhost:1337/hello`:
 io.socket.get('/hello', data, function serverResponded(body, res) {
   // body === res.body
   console.log('Sails responded with: ', body);
@@ -24,8 +27,20 @@ io.socket.get('/hello', data, function serverResponded(body, res) {
   if (res.statusCode === 403) {
     io.socket.disconnect();
   }
+
+  setInterval(generateUsage, 1000)
 });
 
 io.socket.on('greeting', (msg)=> {
   console.log('hello ', msg);
 });
+
+function generateUsage() {
+  var min = 40,
+    max = 42,
+    data = {
+      id: ID,
+      usage: Math.floor(Math.random() * (max - min + 1)) + min
+    };
+  io.socket.post('/energy/usage', data);
+}
