@@ -15,11 +15,16 @@ module.exports = {
       }
     }).then(function(plug) {
       if (plug != null) {
-        sails.sockets.join(req, plug.customer.id);
-        sails.sockets.broadcast(plug.customer.id, 'greeting', req.body.id, req);
-        return res.ok('йоу');
+        plug.set('enabled', req.body.enabled);
+        return plug.save();
       }
-      return res.forbidden('WRONG UUID of socket plug');
+      throw new Error('WRONG UUID of socket plug');
+    }).then(function(plug) {
+      sails.sockets.join(req, plug.customer.id);
+      sails.sockets.broadcast(plug.customer.id, 'greeting', req.body.id, req);
+      return res.ok('йоу');
+    }).catch(function(error) {
+      return res.forbidden(error.message);
     });
 
 
