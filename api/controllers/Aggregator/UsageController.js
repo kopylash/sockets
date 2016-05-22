@@ -1,5 +1,5 @@
-var aggregator = AggregatorFactory.getInstance(1, 'mm', saveData);
-var accumulator = AggregatorFactory.getInstance(10, 'ss', sendDataToCustomers);
+var aggregator = AggregatorFactory.getInstance(10, 'mm', saveData);
+var accumulator = AggregatorFactory.getInstance(3, 'ss', sendDataToCustomers);
 
 module.exports = {
   create: function(req, res) {
@@ -55,5 +55,7 @@ function sendDataToCustomers() {
     Object.keys(usage).forEach(function(customerId) {
       sails.sockets.broadcast(customerId, 'energyUsage', usage[customerId]);
     })
+  } else {
+    sails.sockets.blast('energyUsage', 0);
   }
 }

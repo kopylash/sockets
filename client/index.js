@@ -28,7 +28,7 @@ io.socket.get('/hello', data, function serverResponded(body, res) {
     io.socket.disconnect();
   }
 
-  setInterval(generateUsage, 5000)
+  setInterval(generateUsage, 1000)
 });
 
 io.socket.on('greeting', (msg)=> {
@@ -37,7 +37,7 @@ io.socket.on('greeting', (msg)=> {
 
 function generateUsage() {
   var min = 40,
-    max = 42,
+    max = 70,
     data = {
       id: ID,
       usage: Math.floor(Math.random() * (max - min + 1)) + min
