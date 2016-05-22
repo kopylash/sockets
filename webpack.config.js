@@ -18,14 +18,10 @@ module.exports = {
 
   module: {
     loaders: [
-      {
-        test: /\.jsx$/,
-        exclude: /node_modules/,
-        loader: 'babel-loader',
-        query: {
-          presets: ['react', 'es2015']
-        }
-      }
+      // support es6 harmony for jsx and js
+      {test: /\.jsx?$/, loaders: ['jsx?harmony', 'babel-loader'], exclude: /(node_modules|bower_components)/},
+      // used for i18n
+      {test: /\.json$/, loader: "json"}
     ]
   },
   plugins: [
