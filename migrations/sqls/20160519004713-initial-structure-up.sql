@@ -13,7 +13,7 @@ CREATE TABLE "customers" (
 );
 
 CREATE TABLE "plugs" (
-  "id"           VARCHAR(128) PRIMARY KEY                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           DEFAULT uuid_generate_v4(),
+  "id"           VARCHAR(128) PRIMARY KEY                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        DEFAULT uuid_generate_v4(),
   "description"  TEXT,
   "enabled"      BOOLEAN      NOT NULL                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        DEFAULT FALSE,
   "name"         VARCHAR(255) NOT NULL,
@@ -43,9 +43,13 @@ CREATE TABLE "usage" (
 
 --insert some test data--
 INSERT INTO customers (id, login, password, phone, "energyCost", "wifiPassword", "limit", "createdAt", "updatedAt")
-VALUES (1, 'vkop@grdnz.com', 'qwerty', '380934682120', 0.99, 'qwerty', 2000, NOW(), NOW());
+VALUES
+  (1, 'vkop@grdnz.com', '$2a$08$SqxFgcOxct0hazasKxqmCuiq589k.g6ess7VqHt3xDEQt6KuZhYMi', '380934682120', 0.99, 'qwerty',
+   2000, NOW(), NOW());
 INSERT INTO customers (id, login, password, phone, "energyCost", "wifiPassword", "limit", "createdAt", "updatedAt")
-VALUES (2, 'vladik.kopilash@gmail.com', 'qwerty', '380672693543', 0.5, 'qwerty', 2000, NOW(), NOW());
+VALUES
+  (2, 'vladik.kopilash@gmail.com', '$2a$08$SqxFgcOxct0hazasKxqmCuiq589k.g6ess7VqHt3xDEQt6KuZhYMi', '380672693543', 0.5,
+   'qwerty', 2000, NOW(), NOW());
 
 INSERT INTO plugs (id, name, "customerId") VALUES ('607fd019-2949-49b3-ab61-c470085a092c', 'kitchen', 1);
 INSERT INTO plugs (id, name, "customerId") VALUES ('97f01dcb-3e3e-4fb2-b3d6-291381f624e9', 'heater', 1);
