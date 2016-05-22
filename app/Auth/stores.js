@@ -2,6 +2,7 @@
 
 import Reflux from "reflux";
 import Actions from "./actions";
+import OnlineMeteringActions from "../onlineMetering/actions";
 
 let AuthStore = Reflux.createStore({
 
@@ -21,7 +22,7 @@ let AuthStore = Reflux.createStore({
       this.authData = body;
       console.log(this.authData);
       io.socket.on('energyUsage', (data)=> {
-        console.log('new energy usage: ', data);
+        OnlineMeteringActions.addUsage(data);
       });
       this.trigger(this.authData);
     });
