@@ -23,14 +23,20 @@ module.exports = {
         exclude: /node_modules/,
         loader: 'babel-loader',
         query: {
-          presets: ['react','es2015']
+          presets: ['react', 'es2015']
         }
       }
-    ],
-    plugins: [
-      new webpack.ProvidePlugin({
-        'fetch': 'imports?this=>global!exports?global.fetch!whatwg-fetch'
-      })
     ]
-  }
+  },
+  plugins: [
+    new webpack.ProvidePlugin({
+      'fetch': 'imports?this=>global!exports?global.fetch!whatwg-fetch'
+    }),
+    new webpack.DefinePlugin({
+      __SOCKET_URL__: process.env.SOCKET_URL
+    }),
+    // fixes problem with safe write mode in some IDEs, checks file stats
+    new webpack.OldWatchingPlugin()
+  ]
+
 };
