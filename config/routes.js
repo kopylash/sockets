@@ -34,7 +34,16 @@ module.exports.routes = {
   'POST /energy/usage': {
     controller: 'Aggregator/UsageController',
     action: 'create'
-  }
+  },
+
+  'POST /auth/signin': {
+    controller: 'AuthController',
+    action: 'signin'
+  },
+
+  
+
+
 
 
 };
