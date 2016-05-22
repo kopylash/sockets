@@ -28,7 +28,7 @@ io.socket.get('/hello', data, function serverResponded(body, res) {
     io.socket.disconnect();
   }
 
-  setInterval(generateUsage, 1000)
+  setInterval(generateUsage, 5000)
 });
 
 io.socket.on('greeting', (msg)=> {

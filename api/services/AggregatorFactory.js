@@ -1,54 +1,48 @@
 module.exports = {
-  getInstance: function() {
-    return new Aggregator();
+  getInstance: function(interval, intervalType, cb) {
+    return new Aggregator(interval, intervalType, cb);
   }
 };
 
-function Aggregator() {
+function Aggregator(interval, intervalType, cb) {
   this.storage = {};
 
   var nextDate = new Date();
   if (nextDate.getMinutes() === 0 && nextDate.getSeconds() === 0) {
-    callEveryHour.call(this);
+    callEveryInterval.call(this, cb, getMilliseconds(interval, intervalType));
   } else {
-    // nextDate.setHours(nextDate.getHours() + 1);
-    nextDate.setMinutes(nextDate.getMinutes() + 1);
-    nextDate.setSeconds(0);
+    switch (intervalType) {
+      case 'hh':
+        nextDate.setHours(nextDate.getHours() + interval);
+        nextDate.setMinutes(0);
+        nextDate.setSeconds(0);
+        break;
+      case 'mm':
+        nextDate.setMinutes(nextDate.getMinutes() + interval);
+        nextDate.setSeconds(0);
+        break;
+      case 'ss':
+        nextDate.setSeconds(nextDate.getSeconds() + interval);
+        break;
+    }
 
     var difference = nextDate - new Date();
-    setTimeout(callEveryHour.bind(this), difference);
+    setTimeout(callEveryInterval.bind(this, cb, getMilliseconds(interval, intervalType)), difference);
   }
 }
 
-function callEveryHour() {
-  collectData.call(this);
-  setInterval(collectData.bind(this), 1000 * 10);
+function callEveryInterval(cb, interval) {
+  cb.call(this);
+  setInterval(cb.bind(this), interval);
 }
 
-function collectData() {
-  if (Object.keys(this.storage).length) {
-    console.log(this.storage);
+function getMilliseconds(interval, intervalType) {
+  switch (intervalType) {
+    case 'hh':
+      return interval * 3600 * 1000;
+    case 'mm':
+      return interval * 60 * 1000;
+    case 'ss':
+      return interval * 1000;
   }
-
-  //cloning storage
-  var usage = {};
-  for (var key in this.storage) {
-    if (this.storage.hasOwnProperty(key)) {
-      usage[key] = this.storage[key];
-    }
-  }
-  this.storage = {};
-
-  var date = new Date();
-  date.setMinutes(0);
-  date.setSeconds(0);
-  date.setMilliseconds(0);
-
-  Object.keys(usage).forEach(function(plugId) {
-    EnergyUsage.create({
-      date: date,
-      value: usage[plugId],
-      plugId: plugId
-    })
-  })
 }
