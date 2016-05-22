@@ -14,6 +14,7 @@ import AuthStore from "Auth/stores";
 //initialize socket
 global.io = sailsIOClient(socketIOClient);
 io.sails.url = Constants.apiURL;
+io.sails.reconnection = false;
 
 var App = React.createClass({
 
