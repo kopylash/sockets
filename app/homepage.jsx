@@ -3,7 +3,7 @@
 import React from "react";
 import OnlineMetering from "./onlineMetering";
 import  DailyPie from "./pie";
-import EnergyPoint from "./energyPoint";
+import PointList from "./pointList";
 
 const Homepage = React.createClass({
 
@@ -13,8 +13,8 @@ const Homepage = React.createClass({
         <div style={{width: '50%', height: '400px', float: 'left'}}>
           <DailyPie/>
         </div>
-        <div style={{width: '50%', float: 'left'}}>
-          <EnergyPoint name="kitchen" active={true}/>
+        <div style={{width: '30%', float: 'right'}}>
+          <PointList />
         </div>
         <div style={{clear:'both'}}></div>
         <div style={{height:'600px', margin: '10px auto'}}>
