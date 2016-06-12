@@ -1,7 +1,6 @@
 'use strict';
 
 var DoughnutChart = require("react-chartjs").Doughnut;
-var Chart = require('chartjs');
 
 import React from "react";
 import Reflux from "reflux";
